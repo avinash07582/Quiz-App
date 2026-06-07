@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #7c3aed;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-slate-900 dark:bg-[#000000] dark:text-slate-100 selection:bg-purple-500/30 font-sans antialiased overflow-x-hidden;
+    font-feature-settings: "cv02", "cv05", "cv11";
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/95 dark:bg-[#0d071a]/85 backdrop-blur-2xl border border-purple-600/20 dark:border-purple-500/30 rounded-3xl shadow-2xl shadow-purple-950/5 dark:shadow-purple-950/50 transition-all duration-300;
+  }
+  
+  .glass-input {
+    @apply w-full px-5 py-4 bg-white dark:bg-[#150a2c]/60 border border-purple-600/30 dark:border-purple-500/40 rounded-2xl focus:ring-2 focus:ring-purple-600/30 dark:focus:ring-purple-500/80 focus:border-purple-600 dark:focus:border-purple-400 transition-all outline-none text-slate-900 dark:text-white placeholder:text-purple-950/40 dark:placeholder:text-purple-300/40 shadow-sm dark:shadow-inner;
+  }
+
+  .glass-button-secondary {
+    @apply px-6 py-3 bg-purple-50 dark:bg-purple-500/15 border border-purple-600/30 dark:border-purple-500/40 rounded-xl text-purple-950 dark:text-purple-200 font-bold hover:bg-purple-100 dark:hover:bg-purple-500/30 transition-all shadow-sm cursor-pointer;
+  }
+
+  .btn-premium {
+    @apply relative overflow-hidden px-8 py-4 bg-gradient-to-r from-purple-700 via-purple-600 to-purple-900 text-white font-black rounded-2xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-xl shadow-purple-900/40 dark:shadow-purple-900/50 border border-purple-400/30 cursor-pointer text-center inline-block;
+  }
+
+  .btn-premium::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full hover:animate-[shimmer_2s_infinite];
+  }
+}
+
+/* View Transitions API for Light/Dark Mode Circular Wave */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+.dark::view-transition-old(root) {
+  z-index: 9999;
+}
+.dark::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* 3D Flip Card Utilities */
+.perspective-\[1000px\] {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotateY-180 {
+  transform: rotateY(180deg);
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+/* Background Animation */
+.bg-animate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #fcfbfe 0%, #ffffff 100%);
+  transition: background 0.7s ease;
+}
+
+.dark .bg-animate {
+  background: radial-gradient(circle at 50% 50%, #15002b 0%, #000000 100%);
+}
+
+.bg-orb {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.25;
+  animation: float 20s infinite alternate;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+
+.dark .bg-orb {
+  opacity: 0.3;
+}
+
+.orb-1 {
+  background: #7c3aed;
+  top: -10%;
+  left: -10%;
+}
+
+.orb-2 {
+  background: #a855f7;
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -5s;
+}
+
+.orb-3 {
+  background: #c084fc;
+  top: 40%;
+  left: 30%;
+  width: 350px;
+  height: 350px;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50px, 80px) scale(1.1); }
+  100% { transform: translate(-50px, 40px) scale(0.9); }
+}
+
+/* Custom scrollbar in Black & Purple */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d8b4fe;
+  border-radius: 10px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #581c87;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c084fc;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #7c3aed;
+}
