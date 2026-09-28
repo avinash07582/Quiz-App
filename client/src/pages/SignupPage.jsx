@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -27,7 +28,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center px-3 sm:px-4 py-8 sm:py-10 overflow-hidden">
       {/* Background Orbs */}
       <div className="bg-animate">
         <div className="bg-orb orb-1" />
@@ -41,50 +42,65 @@ const SignupPage = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="w-full max-w-lg"
       >
-        <div className="glass-card p-10 relative overflow-hidden group">
+        <div className="glass-card p-5 sm:p-7 md:p-10 relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-          <div className="relative z-10 space-y-8">
+          <div className="relative z-10 space-y-6 sm:space-y-8">
             <div className="text-center space-y-2">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-700 via-purple-600 to-fuchsia-600 mb-4 shadow-xl shadow-purple-500/30 border border-purple-400/20">
-                <span className="text-3xl text-white">✨</span>
+              <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-purple-700 via-purple-600 to-fuchsia-600 mb-3 sm:mb-4 shadow-xl shadow-purple-500/30 border border-purple-400/20">
+                <span className="text-2xl sm:text-3xl text-white">✨</span>
               </div>
-              <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Onboarding</h1>
-              <p className="text-purple-950/70 dark:text-purple-200/70 font-medium">Join 10k+ researchers using AI for discovery.</p>
+
+              <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+                Onboarding
+              </h1>
+
+              <p className="text-sm sm:text-base text-purple-950/70 dark:text-purple-200/70 font-medium leading-relaxed px-1">
+                Join 10k+ researchers using AI for discovery.
+              </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <div className="space-y-2">
-                <label className="text-sm font-bold text-purple-950/70 dark:text-purple-300/70 uppercase tracking-widest ml-1">Full Identity</label>
+                <label className="text-xs sm:text-sm font-bold text-purple-950/70 dark:text-purple-300/70 uppercase tracking-widest ml-1">
+                  Full Identity
+                </label>
+
                 <input
                   type="text"
                   value={displayName}
                   onChange={(e) => setDisplayName(e.target.value)}
-                  className="glass-input"
+                  className="glass-input w-full text-sm sm:text-base"
                   placeholder="e.g. Alex Vance"
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-bold text-purple-950/70 dark:text-purple-300/70 uppercase tracking-widest ml-1">Secure Email</label>
+                <label className="text-xs sm:text-sm font-bold text-purple-950/70 dark:text-purple-300/70 uppercase tracking-widest ml-1">
+                  Secure Email
+                </label>
+
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="glass-input"
+                  className="glass-input w-full text-sm sm:text-base"
                   placeholder="name@nexus.com"
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-bold text-purple-950/70 dark:text-purple-300/70 uppercase tracking-widest ml-1">Encryption Key</label>
+                <label className="text-xs sm:text-sm font-bold text-purple-950/70 dark:text-purple-300/70 uppercase tracking-widest ml-1">
+                  Encryption Key
+                </label>
+
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="glass-input"
+                  className="glass-input w-full text-sm sm:text-base"
                   placeholder="••••••••"
                   required
                 />
@@ -93,19 +109,22 @@ const SignupPage = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="btn-premium w-full mt-6 flex items-center justify-center gap-3 cursor-pointer"
+                className="btn-premium w-full mt-4 sm:mt-6 flex items-center justify-center gap-2 sm:gap-3 cursor-pointer text-sm sm:text-base !py-3.5 sm:!py-4 text-center"
               >
                 {loading ? (
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 ) : (
-                  'Establish Secure Connection'
+                  <span>Establish Secure Connection</span>
                 )}
               </button>
             </form>
 
-            <p className="text-center text-purple-950/70 dark:text-purple-300/70 font-medium">
+            <p className="text-center text-sm sm:text-base text-purple-950/70 dark:text-purple-300/70 font-medium leading-relaxed">
               Already have clearance?{' '}
-              <Link to="/login" className="text-purple-700 dark:text-purple-400 hover:underline font-black transition">
+              <Link
+                to="/login"
+                className="text-purple-700 dark:text-purple-400 hover:underline font-black transition"
+              >
                 Sign In
               </Link>
             </p>
