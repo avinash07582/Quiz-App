@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -21,9 +22,12 @@ const AuthCallback = () => {
   }, [location, navigate, setUser]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[50vh]">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
-      <p className="mt-4 text-gray-400">Authenticating...</p>
+    <div className="flex flex-col items-center justify-center min-h-[50vh] px-4 sm:px-6">
+      <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-t-2 border-b-2 border-purple-500"></div>
+
+      <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-400 text-center">
+        Authenticating...
+      </p>
     </div>
   );
 };
