@@ -137,7 +137,7 @@ const LoginPage = () => {
             </div>
 
             <button
-              onClick={() => window.location.href = '/api/auth/google'}
+              onClick={() => window.location.href = 'https://quiz-app-backend-k92b.onrender.com/api/auth/google'}
               className="w-full flex items-center justify-center gap-2.5 sm:gap-3 py-3.5 sm:py-4 px-3 bg-white/90 dark:bg-purple-950/20 border border-purple-500/30 hover:bg-purple-600/10 dark:hover:bg-purple-950/40 text-slate-900 dark:text-white font-bold rounded-2xl transition-all shadow-sm cursor-pointer text-sm sm:text-base"
             >
               <img
