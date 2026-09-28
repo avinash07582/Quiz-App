@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getQuiz, submitQuiz } from '../utils/api';
@@ -75,16 +76,25 @@ export default function QuizPage() {
   }
 
   if (loading) return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-      <div className="w-12 h-12 border-4 border-purple-500/20 border-t-purple-600 rounded-full animate-spin" />
-      <p className="text-purple-950/70 dark:text-purple-300/70 animate-pulse font-semibold text-sm sm:text-base">Loading your quiz...</p>
+    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3 sm:gap-4 px-4">
+      <div className="w-10 h-10 sm:w-12 sm:h-12 border-4 border-purple-500/20 border-t-purple-600 rounded-full animate-spin" />
+      <p className="text-purple-950/70 dark:text-purple-300/70 animate-pulse font-semibold text-sm sm:text-base text-center">
+        Loading your quiz...
+      </p>
     </div>
   );
 
   if (!quiz) return (
-    <div className="text-center py-20 space-y-4 px-4">
-      <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">Quiz not found</h2>
-      <button onClick={() => navigate('/')} className="btn-premium !py-3 !px-6 text-sm sm:text-base">Return Home</button>
+    <div className="text-center py-16 sm:py-20 space-y-4 px-4">
+      <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+        Quiz not found
+      </h2>
+      <button
+        onClick={() => navigate('/')}
+        className="btn-premium !py-3 !px-5 sm:!px-6 text-sm sm:text-base"
+      >
+        Return Home
+      </button>
     </div>
   );
 
@@ -94,7 +104,7 @@ export default function QuizPage() {
   const answeredCount = Object.keys(answers).length;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 pb-20 px-3 sm:px-4">
+    <div className="max-w-4xl mx-auto space-y-5 sm:space-y-8 pb-16 sm:pb-20 px-3 sm:px-4 overflow-x-hidden">
       {/* Background Orbs */}
       <div className="bg-animate">
         <div className="bg-orb orb-1" />
@@ -102,20 +112,28 @@ export default function QuizPage() {
       </div>
 
       {/* Header Info */}
-      <div className="glass-card p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 shadow-md">
-        <div className="space-y-1 w-full sm:w-auto">
-          <h1 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white line-clamp-1">{quiz.title}</h1>
-          <p className="text-xs sm:text-sm text-purple-950/70 dark:text-purple-300/70 font-medium">
-            Progress: <span className="text-purple-700 dark:text-purple-400 font-black">{answeredCount}</span> of {quiz.questions.length} answered
+      <div className="glass-card p-3.5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 shadow-md">
+        <div className="space-y-1 w-full sm:w-auto min-w-0">
+          <h1 className="text-base sm:text-xl font-black text-slate-900 dark:text-white line-clamp-2 sm:line-clamp-1 break-words">
+            {quiz.title}
+          </h1>
+
+          <p className="text-[11px] sm:text-sm text-purple-950/70 dark:text-purple-300/70 font-medium leading-relaxed">
+            Progress:{' '}
+            <span className="text-purple-700 dark:text-purple-400 font-black">
+              {answeredCount}
+            </span>{' '}
+            of {quiz.questions.length} answered
           </p>
         </div>
-        <div className="w-full sm:w-64">
+
+        <div className="w-full sm:w-64 flex-shrink-0">
           <TimerBar display={display} pct={pct} />
         </div>
       </div>
 
       {/* Main Quiz Body */}
-      <div className="space-y-6">
+      <div className="space-y-5 sm:space-y-6">
         <QuestionCard
           question={q}
           index={current}
@@ -126,7 +144,7 @@ export default function QuizPage() {
         />
 
         {/* Navigation Controls */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 glass-card p-4 sm:p-6 shadow-md">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6 glass-card p-3.5 sm:p-6 shadow-md">
           <button
             onClick={() => setCurrent((c) => Math.max(0, c - 1))}
             disabled={current === 0}
@@ -135,7 +153,7 @@ export default function QuizPage() {
             ← Previous
           </button>
 
-          <div className="flex gap-1.5 sm:gap-2 flex-wrap justify-center max-w-xs py-2 sm:py-0 order-1 sm:order-2">
+          <div className="flex gap-1.5 sm:gap-2 flex-wrap justify-center max-w-full sm:max-w-xs py-1 sm:py-0 order-1 sm:order-2 px-1">
             {quiz.questions.map((_, i) => (
               <button
                 key={i}
@@ -149,7 +167,7 @@ export default function QuizPage() {
           {current < quiz.questions.length - 1 ? (
             <button 
               onClick={() => setCurrent((c) => c + 1)}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-purple-700 to-purple-600 text-white font-black shadow-md shadow-purple-900/30 transition-all cursor-pointer text-sm sm:text-base order-3"
+              className="w-full sm:w-auto px-5 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-purple-700 to-purple-600 text-white font-black shadow-md shadow-purple-900/30 transition-all cursor-pointer text-sm sm:text-base order-3"
             >
               Next Question →
             </button>
