@@ -1,3 +1,4 @@
+```jsx id="a7k2m9"
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
@@ -47,43 +48,91 @@ const Navbar = () => {
     <motion.nav 
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="fixed top-0 left-0 right-0 z-[100] px-3 sm:px-6 py-3 sm:py-4 w-full"
+      className="fixed top-0 left-0 right-0 z-[100] px-2.5 sm:px-6 py-2.5 sm:py-4 w-full"
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 py-2.5 sm:py-3 glass-card !rounded-2xl border-purple-600/30 dark:border-purple-500/40 w-full shadow-lg">
-        <Link to="/" className="flex items-center gap-1.5 sm:gap-2 text-lg sm:text-xl font-black bg-gradient-to-r from-purple-700 via-purple-500 to-fuchsia-600 dark:from-purple-400 dark:via-fuchsia-300 dark:to-purple-500 bg-clip-text text-transparent flex-shrink-0">
-          <span className="text-xl sm:text-2xl brightness-125">⚡</span>
+      <div className="max-w-7xl mx-auto flex justify-between items-center gap-2 px-3 sm:px-6 py-2 sm:py-3 glass-card !rounded-2xl border-purple-600/30 dark:border-purple-500/40 w-full shadow-lg min-w-0">
+        <Link
+          to="/"
+          className="flex items-center gap-1 sm:gap-2 text-base sm:text-xl font-black bg-gradient-to-r from-purple-700 via-purple-500 to-fuchsia-600 dark:from-purple-400 dark:via-fuchsia-300 dark:to-purple-500 bg-clip-text text-transparent flex-shrink-0"
+        >
+          <span className="text-lg sm:text-2xl brightness-125">⚡</span>
           QuizAI
         </Link>
-        <div className="flex items-center gap-3 sm:gap-6">
-          <Link to="/explore" className="text-xs sm:text-sm font-bold text-purple-950 dark:text-purple-200 hover:text-purple-600 dark:hover:text-purple-400 transition tracking-wide">Explore</Link>
-          <Link to="/interview" className="text-xs sm:text-sm font-bold text-purple-950 dark:text-purple-200 hover:text-purple-600 dark:hover:text-purple-400 transition tracking-wide">Interview Prep</Link>
+
+        <div className="flex items-center gap-2 sm:gap-6 min-w-0">
+          <Link
+            to="/explore"
+            className="text-[10px] min-[400px]:text-xs sm:text-sm font-bold text-purple-950 dark:text-purple-200 hover:text-purple-600 dark:hover:text-purple-400 transition tracking-wide whitespace-nowrap"
+          >
+            Explore
+          </Link>
+
+          <Link
+            to="/interview"
+            className="text-[10px] min-[400px]:text-xs sm:text-sm font-bold text-purple-950 dark:text-purple-200 hover:text-purple-600 dark:hover:text-purple-400 transition tracking-wide whitespace-nowrap"
+          >
+            <span className="hidden min-[400px]:inline">Interview Prep</span>
+            <span className="min-[400px]:hidden">Interview</span>
+          </Link>
           
           {user ? (
             <>
-              <Link to="/dashboard" className="text-xs sm:text-sm font-bold text-purple-950 dark:text-purple-200 hover:text-purple-600 dark:hover:text-purple-400 transition tracking-wide">Dashboard</Link>
+              <Link
+                to="/dashboard"
+                className="text-[10px] min-[400px]:text-xs sm:text-sm font-bold text-purple-950 dark:text-purple-200 hover:text-purple-600 dark:hover:text-purple-400 transition tracking-wide whitespace-nowrap"
+              >
+                Dashboard
+              </Link>
+
               <div className="h-4 w-px bg-purple-500/30 dark:bg-purple-500/40 hidden sm:block" />
-              <div className="flex items-center gap-2 sm:gap-4">
+
+              <div className="flex items-center gap-1.5 sm:gap-4 flex-shrink-0">
                 <ThemeToggle />
+
                 <div className="flex items-center gap-2 sm:gap-3">
-                  <span className="text-purple-950 dark:text-purple-200 text-xs font-black uppercase tracking-widest hidden md:block">{user.displayName}</span>
+                  <span className="text-purple-950 dark:text-purple-200 text-xs font-black uppercase tracking-widest hidden md:block max-w-32 truncate">
+                    {user.displayName}
+                  </span>
+
                   {user.avatar ? (
-                    <img src={user.avatar} alt="Profile" className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl border border-purple-500/40 shadow-md flex-shrink-0" />
+                    <img
+                      src={user.avatar}
+                      alt="Profile"
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl border border-purple-500/40 shadow-md flex-shrink-0"
+                    />
                   ) : (
                     <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-purple-700 to-purple-950 flex items-center justify-center text-[10px] sm:text-xs font-black text-white shadow-md border border-purple-500/40 flex-shrink-0">
                       {user.displayName?.charAt(0).toUpperCase()}
                     </div>
                   )}
                 </div>
-                <button onClick={logout} className="p-1.5 sm:p-2 text-red-500/80 hover:text-red-500 transition hover:bg-red-500/10 rounded-lg cursor-pointer flex-shrink-0" title="Log Out">
+
+                <button
+                  onClick={logout}
+                  className="p-1.5 sm:p-2 text-red-500/80 hover:text-red-500 transition hover:bg-red-500/10 rounded-lg cursor-pointer flex-shrink-0"
+                  title="Log Out"
+                >
                   <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
                 </button>
               </div>
             </>
           ) : (
-            <div className="flex items-center gap-2 sm:gap-4">
+            <div className="flex items-center gap-1.5 sm:gap-4 flex-shrink-0">
               <ThemeToggle />
-              <Link to="/login" className="text-xs sm:text-sm font-bold text-purple-950 dark:text-purple-200 hover:text-purple-600 dark:hover:text-purple-400 transition">Sign In</Link>
-              <Link to="/signup" className="btn-premium !px-3.5 sm:!px-5 !py-2 sm:!py-2.5 !text-xs sm:!text-sm !rounded-xl whitespace-nowrap">Get Started</Link>
+
+              <Link
+                to="/login"
+                className="text-[10px] min-[400px]:text-xs sm:text-sm font-bold text-purple-950 dark:text-purple-200 hover:text-purple-600 dark:hover:text-purple-400 transition whitespace-nowrap"
+              >
+                Sign In
+              </Link>
+
+              <Link
+                to="/signup"
+                className="btn-premium !px-2.5 min-[400px]:!px-3.5 sm:!px-5 !py-1.5 sm:!py-2.5 !text-[10px] min-[400px]:!text-xs sm:!text-sm !rounded-xl whitespace-nowrap"
+              >
+                Get Started
+              </Link>
             </div>
           )}
         </div>
@@ -125,11 +174,12 @@ function App() {
           <BrowserRouter>
             <div className="min-h-screen selection:bg-purple-500/30 bg-white dark:bg-[#000000] transition-colors duration-500 overflow-x-hidden">
               <Navbar />
-              <main className="pt-24 min-h-screen">
+              <main className="pt-20 sm:pt-24 min-h-screen">
                 <AnimatedRoutes />
               </main>
             </div>
           </BrowserRouter>
+
           <Toaster
             position="top-right"
             toastOptions={{
@@ -151,3 +201,4 @@ function App() {
 }
 
 export default App;
+```
