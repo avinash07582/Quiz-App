@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 
 export default function QuestionCard({ question, index, total, value, onChange, showResult }) {
@@ -12,18 +13,22 @@ export default function QuestionCard({ question, index, total, value, onChange, 
   };
 
   return (
-    <div className={`p-6 sm:p-8 rounded-3xl border backdrop-blur-xl transition-all duration-300 ${getStatusClasses()} space-y-6`}>
-      <div className="flex justify-between items-center">
-        <span className="px-3 py-1 rounded-full bg-purple-600/10 border border-purple-600/20 text-purple-800 dark:text-purple-300 text-[10px] sm:text-xs font-bold uppercase tracking-widest shadow-sm">
+    <div className={`p-4 sm:p-6 md:p-8 rounded-3xl border backdrop-blur-xl transition-all duration-300 ${getStatusClasses()} space-y-5 sm:space-y-6`}>
+      <div className="flex justify-between items-start gap-3">
+        <span className="px-2.5 sm:px-3 py-1 rounded-full bg-purple-600/10 border border-purple-600/20 text-purple-800 dark:text-purple-300 text-[9px] sm:text-xs font-bold uppercase tracking-widest shadow-sm">
           {type === 'mcq' ? 'Multiple Choice' : type === 'truefalse' ? 'True / False' : type === 'fillintheblank' ? 'Fill in Blank' : 'Short Answer'}
         </span>
-        <span className="text-xs sm:text-sm font-bold text-slate-500">{index + 1} of {total}</span>
+        <span className="text-[11px] sm:text-sm font-bold text-slate-500 whitespace-nowrap">
+          {index + 1} of {total}
+        </span>
       </div>
 
-      <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-relaxed">{text}</h2>
+      <h2 className="text-base sm:text-lg md:text-xl font-bold text-slate-900 dark:text-white leading-relaxed break-words">
+        {text}
+      </h2>
 
       {type === 'mcq' && (
-        <div className="grid gap-2.5 sm:gap-3">
+        <div className="grid gap-2 sm:gap-3">
           {options.map((opt) => {
             let stateClasses = 'bg-white dark:bg-white/5 border-purple-600/20 dark:border-white/10 hover:border-purple-600/50 hover:bg-purple-50/80 dark:hover:bg-white/10 text-slate-800 dark:text-gray-300 shadow-sm dark:shadow-none cursor-pointer';
             
@@ -37,7 +42,7 @@ export default function QuestionCard({ question, index, total, value, onChange, 
             return (
               <button 
                 key={opt} 
-                className={`w-full p-3.5 sm:p-4 rounded-xl text-left text-sm sm:text-base font-medium border transition-all duration-200 ${stateClasses}`}
+                className={`w-full p-3 sm:p-3.5 md:p-4 rounded-xl text-left text-sm sm:text-base font-medium border transition-all duration-200 break-words ${stateClasses}`}
                 onClick={() => !showResult && onChange(opt)}
               >
                 {opt}
@@ -48,7 +53,7 @@ export default function QuestionCard({ question, index, total, value, onChange, 
       )}
 
       {type === 'truefalse' && (
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+        <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-4">
           {['True', 'False'].map((opt) => {
             let stateClasses = 'bg-white dark:bg-white/5 border-purple-600/20 dark:border-white/10 hover:border-purple-600/50 hover:bg-purple-50/80 dark:hover:bg-white/10 text-slate-800 dark:text-gray-300 shadow-sm dark:shadow-none cursor-pointer';
             
@@ -62,7 +67,7 @@ export default function QuestionCard({ question, index, total, value, onChange, 
             return (
               <button 
                 key={opt} 
-                className={`flex-1 p-4 sm:p-5 rounded-xl font-bold border transition-all duration-200 text-sm sm:text-base ${stateClasses}`}
+                className={`flex-1 p-3.5 sm:p-4 md:p-5 rounded-xl font-bold border transition-all duration-200 text-sm sm:text-base ${stateClasses}`}
                 onClick={() => !showResult && onChange(opt)}
               >
                 {opt === 'True' ? '✅ True' : '❌ False'}
@@ -73,7 +78,7 @@ export default function QuestionCard({ question, index, total, value, onChange, 
       )}
 
       {(type === 'fillintheblank' || type === 'shortanswer') && (
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <textarea
             rows={type === 'shortanswer' ? 4 : 1}
             className={`glass-input !py-3 !rounded-xl text-sm sm:text-base
@@ -84,9 +89,11 @@ export default function QuestionCard({ question, index, total, value, onChange, 
             readOnly={showResult}
           />
           {showResult && !value?.isCorrect && (
-            <div className="p-4 rounded-xl bg-emerald-50/90 dark:bg-emerald-500/10 border border-emerald-500/30 shadow-sm">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50/90 dark:bg-emerald-500/10 border border-emerald-500/30 shadow-sm">
               <p className="text-xs sm:text-sm text-emerald-800 dark:text-emerald-400 font-bold">Correct Answer:</p>
-              <p className="text-slate-900 dark:text-white mt-1 font-bold text-sm sm:text-base">{question.answer}</p>
+              <p className="text-slate-900 dark:text-white mt-1 font-bold text-sm sm:text-base break-words">
+                {question.answer}
+              </p>
             </div>
           )}
         </div>
@@ -94,21 +101,21 @@ export default function QuestionCard({ question, index, total, value, onChange, 
 
       {/* AI Tutor Explanation Box */}
       {showResult && explanation && (
-        <div className="mt-6 pt-6 border-t border-purple-600/20 dark:border-white/10 animate-fadeIn">
-          <div className="flex justify-between items-center mb-3">
-            <h3 className="text-xs sm:text-sm font-black uppercase tracking-widest flex items-center gap-2 text-purple-700 dark:text-purple-300">
+        <div className="mt-5 sm:mt-6 pt-5 sm:pt-6 border-t border-purple-600/20 dark:border-white/10 animate-fadeIn">
+          <div className="flex justify-between items-start gap-3 mb-3">
+            <h3 className="text-[10px] sm:text-xs md:text-sm font-black uppercase tracking-widest flex items-center gap-2 text-purple-700 dark:text-purple-300">
               <span className="p-1 bg-purple-600/15 dark:bg-purple-500/20 rounded text-base sm:text-lg animate-pulse">✨</span>
-              AI Tutor Explanation
+              <span>AI Tutor Explanation</span>
             </h3>
             <button
               onClick={() => setShowExplanation(!showExplanation)}
-              className="text-xs font-bold text-purple-950/60 dark:text-purple-300/60 hover:text-purple-700 dark:hover:text-purple-300 cursor-pointer"
+              className="text-[10px] sm:text-xs font-bold text-purple-950/60 dark:text-purple-300/60 hover:text-purple-700 dark:hover:text-purple-300 cursor-pointer whitespace-nowrap"
             >
               {showExplanation ? 'Collapse ▲' : 'Expand ▼'}
             </button>
           </div>
           {showExplanation && (
-            <div className="p-4 sm:p-5 rounded-2xl bg-purple-50/80 dark:bg-purple-500/10 border border-purple-600/20 dark:border-purple-400/20 text-slate-800 dark:text-purple-100/90 text-sm sm:text-base leading-relaxed shadow-sm">
+            <div className="p-3.5 sm:p-4 md:p-5 rounded-2xl bg-purple-50/80 dark:bg-purple-500/10 border border-purple-600/20 dark:border-purple-400/20 text-slate-800 dark:text-purple-100/90 text-sm sm:text-base leading-relaxed break-words shadow-sm">
               {explanation}
             </div>
           )}
