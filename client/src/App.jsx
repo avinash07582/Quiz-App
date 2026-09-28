@@ -1,4 +1,4 @@
-```jsx id="a7k2m9"
+
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
@@ -201,4 +201,4 @@ function App() {
 }
 
 export default App;
-```
+
